@@ -12,7 +12,7 @@ library(hilldiv)
 
 ## Table of contents
 
-1 - Introduction
-2 - Basics of diversity metrics
-3 - Introduction to Hill numbers
+1. Introduction
+2. Basics of diversity metrics
+3. Introduction to Hill numbers
 
