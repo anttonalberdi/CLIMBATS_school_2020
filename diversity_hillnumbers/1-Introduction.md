@@ -20,6 +20,9 @@ The diversity of molecularly characterised biological systems can be measured us
 
 While either approach might be valid depending on the research question and the study design, it is important to acknowledge the basic differences between abundance‐based and incidence‐based diversity metrics. In the abundance‐based approach, the unit used to compute diversity is the count of DNA sequences assigned to each OTU. In contrast, in the incidence‐based approach, the count of subsystems in which an OTU is present is used to compute diversity. 
 
+### Transforming abundance into incidence data
+Abundance data present in OTU tables, for example, can be easily transformed using the hilldiv function to.incidence().
+
 ````R
 library(hilldiv)
 
@@ -42,7 +45,7 @@ incidence.table
 # in 2 samples and OTU3 in 3 samples.
 ````
 
-The transformation from abundance to incidence data is usually performed by groups. For example, if the aim is to compare the diet of species, abundance data of individual samples can be collapsed into incindence data per species.
+The transformation from abundance to incidence data is usually performed by groups. For example, if the aim is to compare the diet of species, abundance data of individual samples can be collapsed into incindence data per species. This can be achieved by specifying a so-called hierarchy table that shows the relationship between samples and groups. As many groups as wished can be defined, but each sample can only be related to one of the groups.
 
 ````R
 library(hilldiv)
