@@ -113,10 +113,11 @@ library(hilldiv)
 
 unevensystem <- c(999,1)
 names(unevensystem) <- c("OTU1","OTU2")
+
 index_div(unevensystem,index="shannon")
-0.007907255
+# 0.007907255
 index_div(unevensystem,index="simpson")
-0.001998
+# 0.001998
 ````
 
 Specifically, our intuitive notion of diversity would expect that when doubling the number of OTUs in a system, then the diversity measured should also double. This is known as the “doubling property” or “replication principle” (Chao, Chiu, & Jost, 2010; Hill, 1973; Jost, 2006). For example, if the diet of one bat species is comprised of 15 moth species with even abundances, and the diet of another species encompasses 30 moths also with even abundances, intuitively we would conclude that the second bat's diet is twice as diverse (100% more diverse) as the first one. 
