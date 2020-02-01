@@ -71,30 +71,51 @@ incidence.table
 # OTU3        2        1
 ````
 
-## Diversity components
+## Diversity components and traditional diversity metrics 
 Biological diversity is a complex feature that can be decomposed into richness, evenness and regularity components (Alberdi et al. 2019; Jost 2010). Each of these components measure different properties of the diversity, and can be shaped by different ecological forces (Wilsey and Stirling 2007).
 
 ### Richness
-The simplest measure of diversity is OTU richness (McIntosh, 1967). As this only considers whether an OTU is present or absent in the system, abundant and rare OTUs are given the same weight. However, the multiple OTUs present in a system are seldom distributed evenly; thus, richness is rarely the best approach with which to reflect the diversity of a system. Consider for instance, a simple system characterized with 1,000 sequence reads, in which 990 belong to OTU1 and 10 to OTU2. This would yield a richness value of 2, even though the system is overwhelmingly dominated by OTU1. 
+The simplest measure of diversity is OTU richness (McIntosh, 1967). As this only considers whether an OTU is present or absent in the system, abundant and rare OTUs are given the same weight. 
 
 ````R
 library(hilldiv)
 
-example1 <- c(999,1)
+# Define an even system
+evensystem <- c(5,5)
+names(evensystem) <- c("OTU1","OTU2")
+evensystem
+# OTU1 OTU2 
+#    5    5 
+
+#Compute richness
+index_div(evensystem,index="richness")
+# 2
+
+# Define an uneven system
+unevensystem <- c(999,1)
+names(unevensystem) <- c("OTU1","OTU2")
+unevensystem
+# OTU1 OTU2 
+#  999    1 
+
+#Compute richness
 index_div(example1,index="richness")
-2
+# 2
 ````
-### Traditional diversity indices and their limitations
-Thus, metrics such as the Shannon or the Simpson indices, which also account for the evenness of the system, are con‐ sidered more representative of the diversity of a system. It is critical to note, however, that unlike richness, neither the Shannon index nor the Simpson index are actual measures of diversity. The former measures entropy thus yields the uncertainty in the OTU identity of a randomly chosen sequence in the system. The latter provides the probability that two randomly chosen DNA sequences actually belong to different OTUs (Chao, Chiu, et al., 2014a). Consequently, the values that Shannon and Simpson indices yield are difficult to interpret—the values in the previous example are 0.079 and 0.020, respectively, and do not exhibit the intuitive properties ecologists expect from a diversity measurement.
+However, the multiple OTUs present in a system are seldom distributed evenly; thus, richness is rarely the best approach with which to reflect the diversity of a system. Consider for instance, a simple system characterized with 1,000 sequence reads, in which 990 belong to OTU1 and 10 to OTU2. This would yield a richness value of 2, even though the system is overwhelmingly dominated by OTU1. 
 
+### Evenness: Shannon and Simpson indices
+
+However, in real biological systems OTUs are rarely evenly represented, thus including the evenness component, which measures the balance of the relative representation of each OTU, yields more meaningful results. Two popular metrics that that account for both OTU richness and evenness are the Shannon and Simpson indices. These two metrics differ in the way in which the importance of abundant and rare OTUs are weighed. While the former weights each OTU for its quantitative representation —either number DNA sequences or samples, the latter overweights the importance of abundant (OTUs (Alberdi and Gilbert 2019).  It is critical to note, however, that unlike richness, neither the Shannon index nor the Simpson index are actual measures of diversity. The former measures entropy thus yields the uncertainty in the OTU identity of a randomly chosen sequence in the system. The latter provides the probability that two randomly chosen DNA sequences actually belong to different OTUs (Chao, Chiu, et al., 2014a). Consequently, the values that Shannon and Simpson indices yield are difficult to interpret—the values in the previous example are 0.079 and 0.020, respectively, and do not exhibit the intuitive properties ecologists expect from a diversity measurement.
 
 ````R
 library(hilldiv)
 
-example1 <- c(999,1)
-index_div(example1,index="shannon")
+unevensystem <- c(999,1)
+names(unevensystem) <- c("OTU1","OTU2")
+index_div(unevensystem,index="shannon")
 0.007907255
-index_div(example1,index="simpson")
+index_div(unevensystem,index="simpson")
 0.001998
 ````
 
@@ -129,6 +150,25 @@ index_div(bat1,index="simpson")
 0.9333333
 index_div(bat2,index="simpson")
 0.9666667
+````
+
+### Regularity
+A third component with key biological relevance, yet often overlooked in metabarcoding, is regularity, i.e. the degree of similarity across the OTUs. Richness, Shannon index and Simpson index treat OTUs as independent elements, thus overlooking that in most biological systems OTUs tend to be functionally, phylogenetically or ecologically correlated. Faith’s PD,  Allen’s H and Rao's Q are three metrics that incorporate the regularity component, the former considering only richness and the latter accounting for richness and evenness. 
+
+````R
+evensystem <- c(5,5,5)
+names(evensystem) <- c("OTU1","OTU2","OTU3")
+
+eventree <- 
+
+#Compute Faith's PD
+index_div(evensystem, tree=eventree, index="faith")
+
+#Compute Allen's H
+index_div(evensystem, tree=eventree, index="allen")
+
+#Compute Rao's Q
+index_div(evensystem, tree=eventree, index="rao")
 ````
 
 ### Hill numbers
