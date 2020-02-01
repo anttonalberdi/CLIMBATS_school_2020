@@ -47,3 +47,31 @@ index_div(example1,index="simpson")
 0.001998
 ````
 
+Specifically, our intuitive notion of diversity would expect that when doubling the number of OTUs in a system, then the diversity measured should also double. This is known as the “doubling property” or “replication principle” (Chao, Chiu, & Jost, 2010; Hill, 1973; Jost, 2006). For example, if the diet of one bat species is comprised of 15 moth species with even abundances, and the diet of another species encompasses 30 moths also with even abundances, intuitively we would conclude that the second bat's diet is twice as diverse (100% more diverse) as the first one. 
+
+While richness owns that property, most diversity indices do not. The Shannon entropy only increases from 2.7 (15 species) to 3.4 (30 species), which might suggest a di‐ versity gain of 26%, and the Simpson index only increases from 0.93 to 0.96, which might suggest a gain of barely 3%.
+
+````R
+library(hilldiv)
+
+bat1 <- c(rep(1,15))
+bat2 <- c(rep(1,30))
+
+#Richness
+index_div(bat1,index="richness")
+15
+index_div(bat2,index="richness")
+30
+
+#Shannon
+index_div(bat1,index="shannon")
+2.70805
+index_div(bat2,index="shannon")
+3.401197
+
+#Simpson
+index_div(bat1,index="simpson")
+0.9333333
+index_div(bat2,index="simpson")
+0.9666667
+````
