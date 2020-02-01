@@ -94,40 +94,46 @@ The expression yields a diver‐ sity measure in “effective number of OTUs”,
 ````R
 library(hilldiv)
 
-#Create an even system composed of 30 OTUs each represented by 1 sequence
+# Create an even system composed of 30 OTUs each represented by 1 sequence
 evensystem <- c(rep(1,30))
 evensystem
 # [1] 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
 
-#Create an uneven system composed of 15 OTUs represented by 1 sequence and 15 OTUs represented by 5 sequences
-unevensystem <- c(rep(1,15),rep(5,30))
-unevensystem
-# [1] 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5
+# When the types are evenly distributed in the system, Hill numbers 
+# of q-value 0, 1 and 2 (or any other q value) equal richness
 
-#When the types are evenly distributed in the system, Hill numbers of q-value 0, 1 and 2 (or any other q value) equal richness
+index_div(evensystem,index="richness")
+# [1] 30
 hill_div(evensystem,qvalue=0)
 # [1] 30
 hill_div(evensystem,qvalue=1)
 # [1] 30
 hill_div(evensystem,qvalue=2)
 # [1] 30
-index_div(evensystem,index="richness")
-# [1] 30
+````
 
+When the relative abundances of the types vary however, then the effective number of OTUs for q > 0 values decreases.
 
+````R
+library(hilldiv)
+
+# Create an uneven system composed of 15 OTUs represented 
+# by 1 sequence and 15 OTUs represented by 5 sequences
+unevensystem <- c(rep(1,15),rep(5,15))
+unevensystem
+# [1] 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5
+
+# When types (OTUs) are not evenly distributed in the system, Hill numbers 
+# of q-value > 0 show a decreasing effective number of types (OTUs)
 
 index_div(unevensystem,index="richness")
-30
-
-#Shannon
-index_div(bat1,index="shannon")
-2.70805
-index_div(bat2,index="shannon")
-3.401197
-
-#Simpson
-index_div(bat1,index="simpson")
-0.9333333
-index_div(bat2,index="simpson")
-0.9666667
+# [1] 30
+hill_div(unevensystem,qvalue=0)
+# [1] 30
+hill_div(unevensystem,qvalue=1)
+# [1] 23.53793
+hill_div(unevensystem,qvalue=2)
+# [1] 20.76923
+hill_div(unevensystem,qvalue=5)
+# [1] 18.83793
 ````
