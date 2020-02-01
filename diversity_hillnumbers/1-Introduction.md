@@ -18,10 +18,14 @@ Diversity measurements require assignment of an importance value to each of the 
 ## Abundance-based vs. incidence-based quantification of diversity
 The diversity of molecularly characterised biological systems can be measured using two main approaches: abundance-based and incidence-based. Although incidence data are less informative than abundance data, it is both easier to collect, more comparable, and has been extensively used under the niche theory framework. When dealing with DNA‐derived data, incidence‐based approaches have particular relevance, given the limited quantitative relationship that exists between the biomass in the actual system and the DNA sequences produced (Lamb et al., 2019), which might challenge the representativeness of abundance data. However, consensus has not been reached within the molecular ecology research community about which approach is the most appropriate, as simulations have shown that analyses based on incidence data often overestimate the importance of rare OTUs, and abundance data might provide a more accurate view of the diversity even with moderate recovery biases (Deagle et al., 2019). In fact, we recently showed that, when sample sizes and the effect sizes are large enough, both approaches yield biologically meaningful results (Alberdi et al. 2020).
 
-While either approach might be valid depending on the research question and the study design, it is important to acknowledge the basic differences between abundance‐based and incidence‐based diversity metrics. In the abundance‐based approach, the unit used to compute diversity is the count of DNA sequences assigned to each OTU. In contrast, in the incidence‐based approach, the count of subsystems in which an OTU is present is used to compute diversity. 
+While either approach might be valid depending on the research question and the study design, and traditional diversity indices as well as Hill numbers can be computed on both types of data, it is important to acknowledge the basic differences between abundance‐based and incidence‐based diversity metrics. 
+
+In the **abundance‐based** approach, the unit used to compute diversity is the **count of DNA sequences** assigned to each OTU. 
+
+In the **incidence‐based** approach, the unit used to compute diversity is the **count of samples** in which an OTU is present. 
 
 ### Transforming abundance into incidence data
-Abundance data present in OTU tables, for example, can be easily transformed using the hilldiv function to.incidence().
+Abundance data (e.g. OTU table) can be easily transformed into incidence data using the hilldiv function to.incidence().
 
 ````R
 library(hilldiv)
@@ -66,8 +70,6 @@ incidence.table
 # OTU2        1        1
 # OTU3        2        1
 ````
-
-Although the Hill number framework was originally developed to deal with relative abundance data (i.e., relative number of sequences assigned to each OTU), it can also be applied to incidence data. This means that the relative abundances of the types detected in each of the subsystems (=samples) belonging to a certain system are overlooked, and the diversity of the system is calculated by computing the relative number of detections of a given type across the whole system.
 
 ## Diversity components
 Biological diversity is a complex feature that can be decomposed into richness, evenness and regularity components (Alberdi et al. 2019; Jost 2010). Each of these components measure different properties of the diversity, and can be shaped by different ecological forces (Wilsey and Stirling 2007).
