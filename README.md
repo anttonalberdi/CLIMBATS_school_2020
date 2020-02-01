@@ -1,4 +1,4 @@
-# CLIMBATS_school_2020
+# CLIMBATS Molecular School 2020
 CLIMBATS molecular ecology school material
 
 ### Lesson 3
