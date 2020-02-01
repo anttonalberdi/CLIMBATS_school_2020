@@ -1,4 +1,4 @@
-# Basics of diversity metrics
+# Diversity metrics
 
 ## Defining types for diversity quantification
 In community ecology, individuals (i.e., recorded entities) have been traditionally classified into taxonomic species (i.e., types). Therefore, diversity measurements have commonly been carried out at spe‐ cies level (e.g., species richness and species diversity), principally as determined based on morphological features (MacArthur, 1965; Pielou, 1966). The implementation of DNA‐based molecular approaches now enables (in principle) diversity to be measured at a much finer scale—that of DNA sequence variation. Molecularly defined types, broadly known as OTUs or MOTUs (molecular operational taxonomic units, Blaxter et al., 2005), are becoming the preferred types with which to quantify diversity in many fields of the biological sciences. When using molecular approaches, the recorded entities are no longer individuals, but DNA sequences, and the classification into types is not any longer based on morphological features, but the level of dissimilarity between DNA sequences.
