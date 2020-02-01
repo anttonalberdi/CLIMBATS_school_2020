@@ -154,16 +154,28 @@ index_div(bat2,index="simpson")
 ````
 
 ### Regularity
-A third component with key biological relevance, yet often overlooked in metabarcoding, is regularity, i.e. the degree of similarity across the OTUs. Richness, Shannon index and Simpson index treat OTUs as independent elements, thus overlooking that in most biological systems OTUs tend to be functionally, phylogenetically or ecologically correlated. Faith’s PD,  Allen’s H and Rao's Q are three metrics that incorporate the regularity component, the former considering only richness and the latter accounting for richness and evenness. 
+A third component with key biological relevance, yet often overlooked in metabarcoding, is regularity, i.e. the degree of similarity across the OTUs. Richness, Shannon index and Simpson index treat OTUs as independent elements, thus overlooking that in most biological systems OTUs tend to be functionally, phylogenetically or ecologically correlated. Faith’s PD,  Allen’s H and Rao's Q are three metrics that incorporate the regularity component, the first considering only richness and regularity, while the last two accounting for  richness, evenness and regularity. 
+
+The relationship between traditional diversity indices and phylogenetic indices can be observed when comparing a star-like even tree in which the distance between all OTUs is identical with an uneven tree in which the distances between OTUs differ.  
 
 ````R
+#Create an even system
 evensystem <- c(5,5,5)
 names(evensystem) <- c("OTU1","OTU2","OTU3")
 
-libraru(phytools)
+#Create trees
+library(phytools)
 eventree <- starTree(c("OTU1","OTU2","OTU3"), branch.lengths=c(1,1,1))
 uneventree <- read.tree(text="((OTU1:0.5,OTU2:0.5):0.5,OTU3:1);")
 
+#Plot trees
+plot(eventree)
+plot(uneventree)
+````
+
+Faith's PD is identical to richness when the tree that relates all three OTUs is star-like. However the phylogenetic richness value decreases when using the unven tree.
+
+````R
 #Compute Faith's PD
 index_div(evensystem, index="richness")
 # [1] 3
@@ -171,7 +183,11 @@ index_div(evensystem, tree=eventree, index="faith")
 # [1] 3
 index_div(evensystem, tree=uneventree, index="faith")
 # [1] 2.5
+````
 
+Allen's H is identical to Shannon index when the tree that relates all three OTUs is star-like. However the phylogenetic diversity value decreases when using the unven tree.
+
+````R
 #Compute Allen's H
 index_div(evensystem, index="shannon")
 # [1] 1.098612
@@ -179,7 +195,11 @@ index_div(evensystem, tree=eventree, index="allen")
 # [1] 1.098612
 index_div(evensystem, tree=uneventree, index="allen")
 # [1] 0.8675632
+````
 
+Rao's Q is identical to Simpson index when the tree that relates all three OTUs is star-like. However the phylogenetic diversity value decreases when using the unven tree.
+
+````R
 #Compute Rao's Q
 index_div(evensystem, index="simpson")
 # [1] 0.6666667
@@ -189,7 +209,7 @@ index_div(evensystem, tree=uneventree, index="rao")
 # [1] 0.5555556
 ````
 
-### Hill numbers
+## Hill numbers
 Richness, Shannon index and Simpson index belong to a single statistical framework, as they all are monotonic functions of the basic sum q𝜆=ΣSi=1pqi, that is, the sum of the relative abundances of the types (pi) elevated to the q value (Jost, 2006; Keylock, 2005). 
 
 This implies that Hill numbers (qD), or actual diversities, rather than entropies (e.g. Shannon index) or probabilities (e.g. Simpson index), can be formulated in terms of the basic sum (qλ) and the parameter q.
