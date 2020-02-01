@@ -112,7 +112,7 @@ hill_div(evensystem,qvalue=2)
 # [1] 30
 ````
 
-When the relative abundances of the types vary however, then the effective number of OTUs for q > 0 values decreases.
+When the relative abundances of the types vary however, then the effective number of OTUs for q > 0 values decreases progresivelly. The higher the heterogeneity between types, the sharper will be decrease of the effective number of OTUs.
 
 ````R
 library(hilldiv)
@@ -136,4 +136,31 @@ hill_div(unevensystem,qvalue=2)
 # [1] 20.76923
 hill_div(unevensystem,qvalue=5)
 # [1] 18.83793
+````
+In extreme cases in which the system is dominated by a few equally abundant OTUs, the effective number of OTUs will approach the number of those abundant OTUs.
+
+````R
+library(hilldiv)
+
+# Create a super uneven system composed of 29 OTUs represented 
+# by 1 sequence and 1 OTU represented by 971 sequences
+superunevensystem <- c(rep(1,29),971)
+superunevensystem
+# [1]   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1
+# [25]   1   1   1   1   1 971
+
+# When types (OTUs) are very unevenly distributed in the system, Hill numbers 
+# of q-value > 0 show a sharp drop of effective number of types (OTUs),
+# approaching the number of dominant types (OTUs)
+
+index_div(superunevensystem,index="richness")
+# [1] 30
+hill_div(superunevensystem,qvalue=0)
+# [1] 30
+hill_div(superunevensystem,qvalue=1)
+# [1] 1.257225
+hill_div(superunevensystem,qvalue=2)
+# [1] 1.060592
+hill_div(superunevensystem,qvalue=5)
+# [1] 1.037471
 ````
