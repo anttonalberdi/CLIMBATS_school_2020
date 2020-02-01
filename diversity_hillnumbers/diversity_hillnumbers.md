@@ -26,6 +26,9 @@ Diversity measurements require assignment of an importance value to each of the 
 The simplest measure of diversity is OTU richness (McIntosh, 1967). As this only considers whether an OTU is present or absent in the system, abundant and rare OTUs are given the same weight. However, the multiple OTUs present in a system are seldom distributed evenly; thus, richness is rarely the best approach with which to reflect the diversity of a system. Consider for instance, a simple system characterized with 1,000 sequence reads, in which 990 belong to OTU1 and 10 to OTU2. This would yield a richness value of 2, even though the system is overwhelmingly dominated by OTU1. 
 
 ````R
-system <- c(999,1) 
+library(hilldiv)
+
+example1 <- c(999,1)
+index_div(example1,index="richness")
 ````
 
