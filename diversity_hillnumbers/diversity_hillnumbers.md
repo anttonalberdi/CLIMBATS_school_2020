@@ -32,4 +32,18 @@ example1 <- c(999,1)
 index_div(example1,index="richness")
 2
 ````
+### Eveness
+
+Thus, metrics such as the Shannon or the Simpson indices, which also account for the evenness of the system, are con‐ sidered more representative of the diversity of a system. It is critical to note, however, that unlike richness, neither the Shannon index nor the Simpson index are actual measures of diversity. The former measures entropy thus yields the uncertainty in the OTU identity of a randomly chosen sequence in the system. The latter provides the probability that two randomly chosen DNA sequences actually belong to different OTUs (Chao, Chiu, et al., 2014a). Consequently, the values that Shannon and Simpson indices yield are difficult to interpret—the values in the previous example are 0.079 and 0.020, respectively, and do not exhibit the intuitive properties ecologists expect from a diversity measurement.
+
+
+````R
+library(hilldiv)
+
+example1 <- c(999,1)
+index_div(example1,index="shannon")
+0.007907255
+index_div(example1,index="simpson")
+0.001998
+````
 
