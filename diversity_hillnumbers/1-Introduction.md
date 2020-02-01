@@ -166,18 +166,27 @@ uneventree <- read.tree(text="((OTU1:0.5,OTU2:0.5):0.5,OTU3:1);")
 
 #Compute Faith's PD
 index_div(evensystem, index="richness")
+# [1] 3
 index_div(evensystem, tree=eventree, index="faith")
+# [1] 3
 index_div(evensystem, tree=uneventree, index="faith")
+# [1] 2.5
 
 #Compute Allen's H
 index_div(evensystem, index="shannon")
+# [1] 1.098612
 index_div(evensystem, tree=eventree, index="allen")
+# [1] 1.098612
 index_div(evensystem, tree=uneventree, index="allen")
+# [1] 0.8675632
 
 #Compute Rao's Q
 index_div(evensystem, index="simpson")
+# [1] 0.6666667
 index_div(evensystem, tree=eventree, index="rao")
+# [1] 0.6666667
 index_div(evensystem, tree=uneventree, index="rao")
+# [1] 0.5555556
 ````
 
 ### Hill numbers
