@@ -2,4 +2,4 @@
 CLIMBATS molecular ecology school material
 
 ### Lesson 3
-[Diversity analyses using Hill numbers](CLIMBATS_school_2020/tree/master/diversity_hillnumbers)
+[Diversity analyses using Hill numbers](diversity_hillnumbers)
