@@ -164,3 +164,35 @@ hill_div(superunevensystem,qvalue=2)
 hill_div(superunevensystem,qvalue=5)
 # [1] 1.037471
 ````
+#### Controlling the sensitivity towards rare and abundant types
+The sensitivity towards abundant and rare OTUs can be modulated using the scaling parameter q, known as the “order” of diversity (Jost, 2006). **The larger the q value, the higher the importance attributed to abundant OTUs.** Three q values are particularly relevant, both for their significance, and their close relationship to popular diversity indices: q = 0, q = 1 and q = 2.
+
+As we have observed in the previous example, when a diversity of order zero (q = 0) is applied to the Hill numbers expression, it becomes insensitive to OTU frequencies, thus yielding a richness value. As the relative abundances of OTUs are overlooked, rare OTUs are overweighed.
+
+````R
+index_div(superunevensystem,index="richness")
+# [1] 30
+hill_div(superunevensystem,qvalue=0)
+# [1] 30
+````
+
+A q value of 1 (in practical terms its limit, as the Hill number is undefined for q = 1) is the value that weighs OTUs by their frequency, without disproportionately favouring either rare or abundant ones (Jost, 2006). The value it yields is exactly the exponential of the Shannon index. In fact, q values under unity favour rare OTUs, while values above one favour abundant OTUs (Keylock, 2005). 
+
+````R
+hill_div(superunevensystem,qvalue=1)
+# [1] 1.257225
+index_div(superunevensystem,index="shannon")
+# [1] 0.2289003
+exp(index_div(superunevensystem,index="shannon"))
+# [1] 1.257217
+````
+
+When a q value of 2 is ap‐ plied, abundant OTUs are overweighed, and the formula yields the multiplicative inverse of the Simpson index.
+````R
+hill_div(superunevensystem,qvalue=2)
+# [1] 1.060592
+index_div(superunevensystem,index="simpson")
+# [1] 0.05713
+1/(1-index_div(superunevensystem,index="simpson"))
+# [1] 1.060592
+````
