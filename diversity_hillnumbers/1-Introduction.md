@@ -160,7 +160,9 @@ A third component with key biological relevance, yet often overlooked in metabar
 evensystem <- c(5,5,5)
 names(evensystem) <- c("OTU1","OTU2","OTU3")
 
-eventree <- 
+libraru(phytools)
+eventree <- starTree(c("OTU1","OTU2","OTU3"), branch.lengths=c(1,1,1))
+uneventree <- starTree(c("OTU1","OTU2","OTU3"), branch.lengths=c(1,1,1))
 
 #Compute Faith's PD
 index_div(evensystem, tree=eventree, index="faith")
