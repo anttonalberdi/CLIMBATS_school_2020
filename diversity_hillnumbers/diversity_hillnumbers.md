@@ -30,5 +30,6 @@ library(hilldiv)
 
 example1 <- c(999,1)
 index_div(example1,index="richness")
+2
 ````
 
