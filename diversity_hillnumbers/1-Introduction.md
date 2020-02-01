@@ -162,16 +162,22 @@ names(evensystem) <- c("OTU1","OTU2","OTU3")
 
 libraru(phytools)
 eventree <- starTree(c("OTU1","OTU2","OTU3"), branch.lengths=c(1,1,1))
-uneventree <- starTree(c("OTU1","OTU2","OTU3"), branch.lengths=c(1,1,1))
+uneventree <- read.tree(text="((OTU1:0.5,OTU2:0.5):0.5,OTU3:1);")
 
 #Compute Faith's PD
+index_div(evensystem, index="richness")
 index_div(evensystem, tree=eventree, index="faith")
+index_div(evensystem, tree=uneventree, index="faith")
 
 #Compute Allen's H
+index_div(evensystem, index="shannon")
 index_div(evensystem, tree=eventree, index="allen")
+index_div(evensystem, tree=uneventree, index="allen")
 
 #Compute Rao's Q
+index_div(evensystem, index="simpson")
 index_div(evensystem, tree=eventree, index="rao")
+index_div(evensystem, tree=uneventree, index="rao")
 ````
 
 ### Hill numbers
