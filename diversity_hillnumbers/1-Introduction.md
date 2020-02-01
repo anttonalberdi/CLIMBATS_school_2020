@@ -13,6 +13,50 @@ The diversity of molecularly characterised biological systems can be measured us
 
 While either approach might be valid depending on the research question and the study design, it is important to acknowledge the basic differences between abundance‐based and incidence‐based diversity metrics. In the abundance‐based approach, the unit used to compute diversity is the count of DNA sequences assigned to each OTU. In contrast, in the incidence‐based approach, the count of subsystems in which an OTU is present is used to compute diversity. 
 
+````R
+library(hilldiv)
+
+# Create an abundance table, with columns defining samples, and rows OTUs. 
+abundance.table <- cbind(Sample1=c(8,2,20),Sample2=c(4,0,10),Sample3=c(0,0,12),Sample4=c(2,6,0))
+rownames(abundance.table) <- c("OTU1","OTU2","OTU3")
+abundance.table 
+#      Sample1 Sample2 Sample3 Sample4
+# OTU1       8       4       0       2
+# OTU2       2       0       0       6
+# OTU3      20      10      12       0
+
+# Transform the abundance table into incidence
+incidence.table <- to.incidence(abundance.table)
+incidence.table
+# OTU1 OTU2 OTU3 
+#    3    2    3 
+# The bi-dimensional abundance data composed of 4 samples has been collapsed into a 
+# uni-dimensional indicence vector, showing that OTU1 is present in 3 samples, OTU2 
+# in 2 samples and OTU3 in 3 samples.
+````
+
+The transformation from abundance to incidence data is usually performed by groups. For example, if the aim is to compare the diet of species, abundance data of individual samples can be collapsed into incindence data per species.
+
+````R
+library(hilldiv)
+#Define a hierarchy table grouping samples into two species
+hierarchy.table <- cbind(Samples=c("Sample1","Sample2","Sample3","Sample4"),Groups=c("Species1","Species1","Species2","Species2"))
+hierarchy.table
+#      Samples   Groups    
+# [1,] "Sample1" "Species1"
+# [2,] "Sample2" "Species1"
+# [3,] "Sample3" "Species2"
+# [4,] "Sample4" "Species2"
+
+#Transform the abundance table into an incidence table considering the grouping information
+incidence.table <- to.incidence(abundance.table, hierarchy=hierarchy.table)
+incidence.table
+#     Species1 Species2
+# OTU1        2        1
+# OTU2        1        1
+# OTU3        2        1
+````
+
 Although the Hill number framework was originally developed to deal with relative abundance data (i.e., relative number of sequences assigned to each OTU), it can also be applied to incidence data. This means that the relative abundances of the types detected in each of the subsystems (=samples) belonging to a certain system are overlooked, and the diversity of the system is calculated by computing the relative number of detections of a given type across the whole system.
 
 ## Diversity components
