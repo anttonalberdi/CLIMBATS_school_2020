@@ -9,7 +9,9 @@ Alberdi A, Gilbert MTP. (2019). A guide to the application of Hill numbers to DN
 
 1. Introduction
 2. [Diversity metrics](2-Diversity_metrics.md)
-3. [Hill numbers](3-Hill_numbers.md)
+3. [Introduction to Hill numbers](3-Introduction_to_Hill_numbers.md)
+4. Diversity partitioning using Hill numbers
+5. Integral diversity analysis using a real dataset
 
 ## The package hilldiv
 
