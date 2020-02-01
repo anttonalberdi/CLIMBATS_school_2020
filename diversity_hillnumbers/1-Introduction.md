@@ -13,6 +13,6 @@ library(hilldiv)
 ## Table of contents
 
 1. Introduction
-2. Diversity metrics
+2. [Diversity metrics](2-Diversity_metrics.md)
 3. Hill numbers
 
