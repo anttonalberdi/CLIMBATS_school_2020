@@ -32,8 +32,7 @@ example1 <- c(999,1)
 index_div(example1,index="richness")
 2
 ````
-### Eveness
-
+### Traditional diversity indices and their limitations
 Thus, metrics such as the Shannon or the Simpson indices, which also account for the evenness of the system, are con‐ sidered more representative of the diversity of a system. It is critical to note, however, that unlike richness, neither the Shannon index nor the Simpson index are actual measures of diversity. The former measures entropy thus yields the uncertainty in the OTU identity of a randomly chosen sequence in the system. The latter provides the probability that two randomly chosen DNA sequences actually belong to different OTUs (Chao, Chiu, et al., 2014a). Consequently, the values that Shannon and Simpson indices yield are difficult to interpret—the values in the previous example are 0.079 and 0.020, respectively, and do not exhibit the intuitive properties ecologists expect from a diversity measurement.
 
 
@@ -49,18 +48,75 @@ index_div(example1,index="simpson")
 
 Specifically, our intuitive notion of diversity would expect that when doubling the number of OTUs in a system, then the diversity measured should also double. This is known as the “doubling property” or “replication principle” (Chao, Chiu, & Jost, 2010; Hill, 1973; Jost, 2006). For example, if the diet of one bat species is comprised of 15 moth species with even abundances, and the diet of another species encompasses 30 moths also with even abundances, intuitively we would conclude that the second bat's diet is twice as diverse (100% more diverse) as the first one. 
 
-While richness owns that property, most diversity indices do not. The Shannon entropy only increases from 2.7 (15 species) to 3.4 (30 species), which might suggest a di‐ versity gain of 26%, and the Simpson index only increases from 0.93 to 0.96, which might suggest a gain of barely 3%.
+While richness owns that property, most diversity indices do not. The Shannon entropy only increases from 2.7 (15 species) to 3.4 (30 species), which might suggest a diversity gain of 26%, and the Simpson index only increases from 0.93 to 0.96, which might suggest a gain of barely 3%. Hence, treating diversity indices as diversity values has noticeable practical consequences, as they all vary in range and behaviour (Jost, 2006).
 
 ````R
 library(hilldiv)
 
 bat1 <- c(rep(1,15))
+bat1
+ [1] 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
 bat2 <- c(rep(1,30))
-
+bat2
+ [1] 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+ 
 #Richness
 index_div(bat1,index="richness")
 15
 index_div(bat2,index="richness")
+30
+
+#Shannon
+index_div(bat1,index="shannon")
+2.70805
+index_div(bat2,index="shannon")
+3.401197
+
+#Simpson
+index_div(bat1,index="simpson")
+0.9333333
+index_div(bat2,index="simpson")
+0.9666667
+````
+
+### Hill numbers
+Richness, Shannon index and Simpson index belong to a single statistical framework, as they all are monotonic functions of the basic sum q𝜆=ΣSi=1pqi, that is, the sum of the relative abundances of the types (pi) elevated to the q value (Jost, 2006; Keylock, 2005). 
+
+This implies that Hill numbers (qD), or actual diversities, rather than entropies (e.g. Shannon index) or probabilities (e.g. Simpson index), can be formulated in terms of the basic sum (qλ) and the parameter q.
+
+**Hill number expression**
+
+This expression was first discovered by Hill (1973), hence the use of the name “Hill numbers” to refer to the output of this formula. Hill numbers have two major advantages over diversity indi‐ ces: (a) the interpretation of the measure and its measurement unit is always the same (Chao, Chiu, et al., 2014a; Tuomisto, 2010a), and ii) the sensitivity towards abundant and rare OTUs can be modulated with the parameter q. 
+
+#### Effective number of OTUs
+The expression yields a diver‐ sity measure in “effective number of OTUs”, that is, the number of equally abundant OTUs that would be needed to give the same value of diversity (Hill, 1973; Jost, 2006). When all OTUs in a system have the same relative abundances, as in the moth example given above, the effective number of OTUs for all q values equals the actual number of OTUs, namely richness.
+
+````R
+library(hilldiv)
+
+#Create an even system composed of 30 OTUs each represented by 1 sequence
+evensystem <- c(rep(1,30))
+evensystem
+# [1] 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+
+#Create an uneven system composed of 15 OTUs represented by 1 sequence and 15 OTUs represented by 5 sequences
+unevensystem <- c(rep(1,15),rep(5,30))
+unevensystem
+# [1] 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5 5
+
+#When the types are evenly distributed in the system, Hill numbers of q-value 0, 1 and 2 (or any other q value) equal richness
+hill_div(evensystem,qvalue=0)
+# [1] 30
+hill_div(evensystem,qvalue=1)
+# [1] 30
+hill_div(evensystem,qvalue=2)
+# [1] 30
+index_div(evensystem,index="richness")
+# [1] 30
+
+
+
+index_div(unevensystem,index="richness")
 30
 
 #Shannon
