@@ -23,7 +23,7 @@ Load the data files that will be used in the lesson
 ````R
 #Low the OTU table
 otutable <- read.csv("EuropeBatDiet.csv",row.names=1)
-#Visualise it
+#Visualise the first 6 rows
 head(otutable)
 
 #Low the OTU table
@@ -32,7 +32,7 @@ tree <- read.tree("EuropeBatDiet.tree")
 plot(tree)
 
 #Low the hierarchy table that specifies the relationship between samples and predator species
-sampleinfo <- read.csv("EuropeBatDiet.sampleinfo.tree")
-#Visualise it
-head(sampleinfo)
+sampleinfo <- read.csv("EuropeBatDiet.sampleinfo.csv",row.names=1)
+#Visualise the whole table
+sampleinfo
 ````
