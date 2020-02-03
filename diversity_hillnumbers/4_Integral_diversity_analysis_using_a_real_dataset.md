@@ -36,3 +36,26 @@ sampleinfo <- read.csv("EuropeBatDiet.sampleinfo.csv",row.names=1)
 #Visualise the whole table
 sampleinfo
 ````
+
+## Screening the data files
+We will first inspect the general properties of the OTU table and OTU tree.
+
+````R
+#Check how many samples are represented in the OTU table
+ncol(otutable)
+
+#Check how many OTUs are present in the OTU table
+nrow(otutable)
+
+#Check whether the OTU table has been normalised
+colSums(otutable)
+
+#Obtain a general overview of the tree properties
+tree
+````
+
+Now, we will check whether the OTU names in the table and the tree match, as this is essential for the correct analysis of the data. This can be easily done using the function match_data().
+
+````R
+match_data(otutable,tree)
+````
