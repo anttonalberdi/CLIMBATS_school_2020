@@ -64,6 +64,14 @@ match_data(otutable,tree)
 The function warns that the OTU tree contains OTUs absent in the OTU table, and tells us to filter the OTU tree. The same function can be used to perform such a filtering, by specifying the type of output we want.
 ````R
 match_data(otutable,tree,output="tree")
+# The following OTUs/ASVs were removed from the tree for being absent in the count table: OTU334, OTU530, OTU1948, OTU1309, # OTU1970
+# 
+# Phylogenetic tree with 699 tips and 698 internal nodes.
+# 
+# Tip labels:
+# 	OTU944, OTU2775, OTU168, OTU450, OTU700, OTU219, ...
+# 
+# Rooted; includes branch lengths.
 ````
 
 The function returns that a few OTUs have been removed from the tree, but the tree has not been saved. To save the tree, we need to specify a new object, which can have the same name as the original tree. We can run the match_data() function again to ensure the OTU names at the OTU table and tree are matching.
