@@ -8,6 +8,31 @@ The dataset has been downscaled and slightly modified for educational purposes. 
 ## Setting the working environment
 First of all download the files stored in the [data directory](https://github.com/anttonalberdi/CLIMBATS_school_2020/tree/master/diversity_hillnumbers/data) of this lesson, and save them in the local directory you will use for the analyses.
 
-´´´´R
+````R
+#The working directory in this example is my Desktop
 setwd("/Users/anttonalberdi/Desktop")
-´´´´
+````
+
+Load all the libraries we need for performing the analyses.
+````R
+library(hilldiv)
+library(ape)
+````
+
+Load the data files that will be used in the lesson
+````R
+#Low the OTU table
+otutable <- read.csv("EuropeBatDiet.csv",row.names=1)
+#Visualise it
+head(otutable)
+
+#Low the OTU table
+tree <- read.tree("EuropeBatDiet.tree")
+#Visualise it
+plot(tree)
+
+#Low the hierarchy table that specifies the relationship between samples and predator species
+sampleinfo <- read.csv("EuropeBatDiet.sampleinfo.tree")
+#Visualise it
+head(sampleinfo)
+````
