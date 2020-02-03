@@ -58,4 +58,17 @@ Now, we will check whether the OTU names in the table and the tree match, as thi
 
 ````R
 match_data(otutable,tree)
+# The OTU tree contains OTUs absent in the OTU table. Filter the OTU tree.
+````
+
+The function warns that the OTU tree contains OTUs absent in the OTU table, and tells us to filter the OTU tree. The same function can be used to perform such a filtering, by specifying the type of output we want.
+````R
+match_data(otutable,tree,output="tree")
+````
+
+The function returns that a few OTUs have been removed from the tree, but the tree has not been saved. To save the tree, we need to specify a new object, which can have the same name as the original tree. We can run the match_data() function again to ensure the OTU names at the OTU table and tree are matching.
+````R
+tree <- match_data(otutable,tree,output="tree")
+match_data(otutable,tree)
+# OTUs in the OTU table and OTU tree match perfectly.
 ````
