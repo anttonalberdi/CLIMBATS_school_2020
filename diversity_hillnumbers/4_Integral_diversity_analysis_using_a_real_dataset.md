@@ -37,22 +37,42 @@ sampleinfo <- read.csv("EuropeBatDiet.sampleinfo.csv",row.names=1)
 sampleinfo
 ````
 
-## Screening the data files
-We will first inspect the general properties of the OTU table and OTU tree.
+## Screening and editing the data files
+We will first inspect the general properties of the OTU table.
 
 ````R
-#Check how many samples are represented in the OTU table
+# Check how many samples are represented in the OTU table
 ncol(otutable)
 
-#Check how many OTUs are present in the OTU table
+# Check how many OTUs are present in the OTU table
 nrow(otutable)
 
-#Check whether the OTU table has been normalised
+# Check whether the OTU table has been normalised
 colSums(otutable)
 
-#Obtain a general overview of the tree properties
-tree
+# We might also want to check what is the minimum representation of an OTU in a sample
+min(otutable[otutable > 0])
+# [1] 0.0001943025
+# There is at least one OTU in a sample with a relative representation of 0.01% of the total reads.
+
+# An histogram will give us a better overview of the distribution of the relative abundances. Note that 0 values have been skipped.
+hist(otutable[otutable > 0])
 ````
+
+At this point we might be interested in filtering OTUs with very low representation. We can do so using the copy_filt() function. This function can be used either for filtering OTUs based on raw abundance values (if using integers) or relative abundance values (if using decimals).
+````R
+# Check how many samples are represented in the OTU table
+nrow(otutable)
+otutable <- copy_filt(otutable,threshold=0.02)
+````
+
+
+
+
+
+
+
+
 
 Now, we will check whether the OTU names in the table and the tree match, as this is essential for the correct analysis of the data. This can be easily done using the function match_data().
 
