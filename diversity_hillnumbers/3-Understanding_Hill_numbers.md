@@ -71,7 +71,7 @@ sum(pi^qvalue)^(1/(1-qvalue))
 # [1] 1
 ````
 
-When using the q-value 1 the result is not identical to what we got with "hill_div(evensystem,qvalue=1)". The reason is that the Hill number is not undefined for q=1. We won't explain why in this lesson. The limits of unity are defined though, which yield an almost identical results: 
+When using the q-value 1 the result is not identical to what we got with "hill_div(evensystem,qvalue=1)". The reason is that the Hill number is undefined for q=1. We won't explain why in this lesson. The limits of unity are defined though, which yield an almost identical results: 
 
 ````R
 qvalue=0.99999999
@@ -125,6 +125,8 @@ hill_div(superunevensystem,qvalue=2)
 # [1] 1.060592
 ````
 
+Next, we can do the same operations with the super uneven system
+
 ````R
 vector <- superunevensystem
 pi <- tss(vector[vector!=0])
@@ -137,7 +139,10 @@ pi^qvalue
 # [1] 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
 
 1/(1-qvalue)
-# 1
+# [1] 1
+
+sum(pi^qvalue)^(1/(1-qvalue))
+# [1] 30
 
 qvalue=2
 pi^qvalue
@@ -146,9 +151,14 @@ pi^qvalue
 
 1/(1-qvalue)
 # [1] -1
+
+sum(pi^qvalue)^(1/(1-qvalue))
+# [1] 1.060592
 ````
 
 ## Phylogenetic Hill numbers
+
+The mathematical operations become slightly more complicated when including trees into the computation of diversities. The effect of different-shaped trees can be clearly shown though when comparing a simple star-shaped tree with a hierarchical tree. First of all, let's create those simple trees and check how the Hill number value is changed.
 
 ````R
 #Create an even system
@@ -160,11 +170,30 @@ library(phytools)
 eventree <- starTree(c("OTU1","OTU2","OTU3"), branch.lengths=c(1,1,1))
 uneventree <- read.tree(text="((OTU1:0.5,OTU2:0.5):0.5,OTU3:1);")
 
+hill_div(evensystem,qvalue=0)
+[1] 3
 hill_div(evensystem,qvalue=0,tree=eventree)
 [1] 3
 hill_div(evensystem,qvalue=0,tree=uneventree)
 [1] 2.5
 ````
+
+The even tree yields exactly the same diversity value as the neutral Hill number, while the hierarchical tree yields a lower diversity value. Remember that while the neutral Hill number yields a diversity value in "effective number of OTUs", the phylogenetic Hill number yields a diversity value in "effective number of lineages".
+
+The computation of phylogenetic Hill numbers requires some operations to be done before computing diversity:
+````R
+#All these are preparations
+Li <- tree$edge.length
+ltips <- sapply(tree$edge[, 2], function(node) tips(tree, node))
+ai <- unlist(lapply(ltips, function(TipVector) sum(vector[TipVector])))
+T <- sum(Li * ai)
+Li <- Li[ai != 0]
+ai <- ai[ai != 0]
+
+#To apply the phylogenetic Hill number formula
+sum(Li/T * ai^qvalue)^(1/(1-qvalue))
+````
+In the following, we will analyse each step one by one.
 
 ### Even tree
 
