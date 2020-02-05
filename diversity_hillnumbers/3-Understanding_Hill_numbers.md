@@ -36,6 +36,10 @@ qvalue=1
 sum(pi^qvalue)^(1/(1-qvalue))
 # [1] 1
 
+qvalue=0.99999999
+sum(pi^qvalue)^(1/(1-qvalue))
+# [1] 30
+
 qvalue=2
 sum(pi^qvalue)^(1/(1-qvalue))
 # [1] 30
