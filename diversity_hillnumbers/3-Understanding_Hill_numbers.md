@@ -107,6 +107,8 @@ eventree <- starTree(c("OTU1","OTU2","OTU3"), branch.lengths=c(1,1,1))
 uneventree <- read.tree(text="((OTU1:0.5,OTU2:0.5):0.5,OTU3:1);")
 ````
 
+### Even tree
+
 ````R
 vector <- tss(c(5,5,5))
 names(vector) <- c("OTU1","OTU2","OTU3")
@@ -151,6 +153,8 @@ ai^qvalue
 # [1] 1
 
 ````
+
+### Uneven tree
 
 ````R
 vector <- tss(c(5,5,5))
