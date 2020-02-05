@@ -6,7 +6,18 @@ library(hilldiv)
 evensystem <- c(rep(1,30))
 unevensystem <- c(rep(1,15),rep(5,15))
 superunevensystem <- c(rep(1,29),971)
+````
 
+````R
+hill_div(evensystem,qvalue=0)
+# [1] 30
+hill_div(evensystem,qvalue=1)
+# [1] 30
+hill_div(evensystem,qvalue=2)
+# [1] 30
+````
+
+````R
 vector <- evensystem
 pi <- vector[vector!=0]
 # pi
@@ -45,5 +56,36 @@ pi^qvalue
 # 1
 ````
 
+````R
+hill_div(superunevensystem,qvalue=0)
+# [1] 30
+hill_div(superunevensystem,qvalue=1)
+# [1] 1.257225
+hill_div(superunevensystem,qvalue=2)
+# [1] 1.060592
+````
+
+````R
+vector <- superunevensystem
+pi <- tss(vector[vector!=0])
+pi
+# [1] 0.001 0.001 0.001 0.001 0.001 0.001 0.001 0.001 0.001 0.001 0.001 0.001 0.001 0.001 0.001 0.001 0.001 0.001 0.001 0.001 0.001 0.001 0.001 0.001 0.001
+# [26] 0.001 0.001 0.001 0.001 0.971
+
+qvalue=0
+pi^qvalue
+# [1] 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+
+1/(1-qvalue)
+# 1
+
+qvalue=2
+pi^qvalue
+# [1] 0.000001 0.000001 0.000001 0.000001 0.000001 0.000001 0.000001 0.000001 0.000001 0.000001 0.000001 0.000001 0.000001 0.000001 0.000001 0.000001
+# [17] 0.000001 0.000001 0.000001 0.000001 0.000001 0.000001 0.000001 0.000001 0.000001 0.000001 0.000001 0.000001 0.000001 0.942841
+
+1/(1-qvalue)
+# [1] -1
+````
 
 
