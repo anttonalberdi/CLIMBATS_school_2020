@@ -105,6 +105,11 @@ names(evensystem) <- c("OTU1","OTU2","OTU3")
 library(phytools)
 eventree <- starTree(c("OTU1","OTU2","OTU3"), branch.lengths=c(1,1,1))
 uneventree <- read.tree(text="((OTU1:0.5,OTU2:0.5):0.5,OTU3:1);")
+
+hill_div(evensystem,qvalue=0,tree=eventree)
+[1] 3
+hill_div(evensystem,qvalue=0,tree=uneventree)
+[1] 2.5
 ````
 
 ### Even tree
