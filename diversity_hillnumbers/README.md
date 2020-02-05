@@ -22,6 +22,8 @@ To install **hilldiv** in your R environment you can rely on the built-in instal
 ````R
 install.packages("hilldiv")
 library(hilldiv)
+library(geiger)
+library(ape)
 ````
 If you want to use the latest development version available at Github, you need to 1) install devtools, 2) load devtools library, 3) install **hilldiv** using devtools and 4) finally load **hilldiv** library to your environment.
 
