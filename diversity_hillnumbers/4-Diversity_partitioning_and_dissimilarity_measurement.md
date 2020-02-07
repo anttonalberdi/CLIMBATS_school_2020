@@ -77,8 +77,13 @@ pi.q <- pi^qvalue
 
 #### Weighted
 ````R
-#With unequal weights
+#With equal weights
+weightvector <- rep(1/4,4)
 qvalue=2
+
+alpha_div(abundance.table,qvalue=2,weight=weightvector)
+# [1] 2.459373
+
 weight <- rep(1/4,4)
 pi <- tss(abundance.table)
 pi.w <- sweep(pi, 2, weight, "*")
@@ -87,8 +92,13 @@ N = ncol(abundance.table)
 sum(rowSums(pi.w.q))^(1/(1 - qvalue))/N
 # [1] 2.459373
 
+#With unequal weights
+weightvector <- c(0.2,0.2,0.3,0.3)
 qvalue=2
-weight <- c(0.2,0.2,0.3,0.3)
+
+alpha_div(abundance.table,qvalue=2,weight=weightvector)
+# [1] 2.364782
+
 pi <- tss(abundance.table)
 pi.w <- sweep(pi, 2, weight, "*")
 pi.w.q <- pi.w^qvalue
