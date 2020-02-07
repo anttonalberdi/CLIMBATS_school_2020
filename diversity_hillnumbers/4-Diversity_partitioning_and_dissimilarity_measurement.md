@@ -26,7 +26,7 @@ hill_div(abundance.table,qvalue=2)
 ````
 
 ## Diversity partitioning
-Diversity can also be computed for the whole system, and when doing so, there are different approaches that can be taken. In ecology, the idea of diversity has been traditionally broken down into three components: alpha (α), beta (β) and gamma (γ) diversities (Whittaker, 1960). In general terms, α‐diversity refers to the average diversity of subsystems or samples (although see discussion about the different α‐diversities in Chao, Chiu, & Hsieh, 2012), β‐diversity measures the differences between subsys‐ tems (although see discussion about the different β‐diversities in Tuomisto, 2010a), while γ‐diversity includes the entire diversity of the system (Figure 5). Despite the existence of different ap‐ proaches for diversity partitioning, within the framework of Hill number diversity partitioning responds to a multiplicative defini‐ tion qDγ = qDα × qDß (Chao et al., 2012; Jost, 2007); that is, beta diversity is obtained by dividing gamma diversity by alpha diversity.
+Diversity can also be computed for the whole system, and when doing so, there are different approaches that can be taken. In ecology, the idea of diversity has been traditionally broken down into three components: alpha (α), beta (β) and gamma (γ) diversities (Whittaker, 1960). In general terms, α‐diversity refers to the average diversity of subsystems or samples (although see below), β‐diversity measures the differences between subsystems (although see discussion below), while γ‐diversity includes the entire diversity of the system. Despite the existence of different approaches for diversity partitioning, within the framework of Hill number diversity partitioning responds to a multiplicative definition qDγ = qDα × qDß (Chao et al., 2012; Jost, 2007); that is, beta diversity is obtained by dividing gamma diversity by alpha diversity.
 
 ````R
 #Compute alpha diversity values under different q values
@@ -38,15 +38,81 @@ alpha_div(abundance.table,qvalue=2)
 gamma_div(abundance.table,qvalue=0)
 gamma_div(abundance.table,qvalue=1)
 gamma_div(abundance.table,qvalue=2)
+
+#Compute beta diversity values under different q values
+gamma_div(abundance.table,qvalue=0)/alpha_div(abundance.table,qvalue=0)
+gamma_div(abundance.table,qvalue=1)/alpha_div(abundance.table,qvalue=1)
+gamma_div(abundance.table,qvalue=2)/alpha_div(abundance.table,qvalue=2)
 ````
 
 ### Alpha diversity
+It is important to note that alpha diversity is not obtained by averaging the Hill numbers of the subsystems, but computing the Hill numbers from the averaged basic sums of the subsystems (Chao et al., 2012). 
 
 ````R
+# Alpha diversity
+alpha_div(abundance.table,qvalue=1)
+# [1] 2.584195
 
+# Average of individual sample Hill numbers
+mean(hill_div(abundance.table,qvalue=1))
+# [1] 2.669514
+
+# Averaged basic sums of the samples taken to the exponential (see relationship between 
+# Shannon index and Hill number of q=1)
+exp(mean(index_div(abundance.table,index="shannon")))
+# [1] 2.584195
+````
+
+#### Unweighted
+````R
+alpha_div(abundance.table,qvalue=2)
+# [1] 2.459373
+
+#With equal weights
+pi <- tss(abundance.table)
+pi.q <- pi^qvalue
+(sum(colSums(pi.q))/N)^(1/(1 - qvalue))
+# [1] 2.459373
+````
+
+#### Weighted
+````R
+#With unequal weights
+qvalue=2
+weight <- rep(1/4,4)
+pi <- tss(abundance.table)
+pi.w <- sweep(pi, 2, weight, "*")
+pi.w.q <- pi.w^qvalue
+N = ncol(abundance.table)
+sum(rowSums(pi.w.q))^(1/(1 - qvalue))/N
+# [1] 2.459373
+
+qvalue=2
+weight <- c(0.2,0.2,0.3,0.3)
+pi <- tss(abundance.table)
+pi.w <- sweep(pi, 2, weight, "*")
+pi.w.q <- pi.w^qvalue
+N = ncol(abundance.table)
+sum(rowSums(pi.w.q))^(1/(1 - qvalue))/N
+# [1] 2.364782
 ````
 
 ### Gamma diversity
+
+
+````R
+# Gamma diversity
+gamma_div(abundance.table,qvalue=1)
+# [1] 3.859641
+
+hill_div(rowSums(abundance.table)*0.9999,qvalue=1)
+
+
+# Averaged basic sums of the samples taken to the exponential (see relationship between 
+# Shannon index and Hill number of q=1)
+exp(mean(index_div(abundance.table,index="shannon")))
+# [1] 2.584195
+````
 
 ### Beta diversity
 
