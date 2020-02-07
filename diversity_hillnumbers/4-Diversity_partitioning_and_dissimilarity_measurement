@@ -27,7 +27,6 @@ hill_div(abundance.table,qvalue=2)
 
 ## Diversity partitioning
 
-Diversity can also be computed for the whole system, and when doing so, there are different approaches that can be taken. In ecology, the idea of diversity has been traditionally broken down into three components: alpha (α), beta (β) and gamma (γ) diversities (Whittaker, 1960). In general terms, α‐diversity refers to the average diversity of subsystems or samples (although see discussion about the different α‐diversities in Chao, Chiu, & Hsieh, 2012), β‐diversity measures the differences between subsys‐ tems (although see discussion about the different β‐diversities in Tuomisto, 2010a), while γ‐diversity includes the entire diversity of the system (Figure 5). Despite the existence of different ap‐ proaches for diversity partitioning, within the framework of Hill number diversity partitioning responds to a multiplicative defini‐ tion qDγ = qDα × qDß (Chao et al., 2012; Jost, 2007); that is, beta di‐ versity is obtained by dividing gamma diversity by alpha diversity.
 
 ````R
 #Compute alpha diversity values under different q values
