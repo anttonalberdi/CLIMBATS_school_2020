@@ -112,16 +112,14 @@ sum(rowSums(pi.w.q))^(1/(1 - qvalue))/N
 
 ````R
 # Gamma diversity
-gamma_div(abundance.table,qvalue=1)
-# [1] 3.859641
+gamma_div(abundance.table,qvalue=2)
+# [1] 3.762173
 
-hill_div(rowSums(abundance.table)*0.9999,qvalue=1)
-
-
-# Averaged basic sums of the samples taken to the exponential (see relationship between 
-# Shannon index and Hill number of q=1)
-exp(mean(index_div(abundance.table,index="shannon")))
-# [1] 2.584195
+weight <- rep(1/4,4)
+pi <- tss(abundance.table)
+pi.w <- sweep(pi, 2, weight, "*")
+sum(rowSums(pi.w)^qvalue)^(1/(1 - qvalue))
+# [1] 3.762173
 ````
 
 ### Beta diversity
