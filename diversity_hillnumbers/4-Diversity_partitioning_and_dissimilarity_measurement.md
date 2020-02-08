@@ -146,6 +146,81 @@ div_part(abundance.table[,c(1,2)],qvalue=0)
 ````
 
 ## (Dis)similarity computation
+Dissimilarity indices range between 0 and 1; 0 indicates that the subsystems compared are identical, while 1 indicates that they are completely different. As the beta diversity lies in between 1 and the total number of subsystems, the Hill number beta diversity cannot directly be used to compute dissimilarities. However, it is possible —and desirable— to remove the dependence on the number of subsystems and compute dissimilarity measures by applying simple transformations to beta diversity, both for diversities (Chao et al., 2012; Jost, 2007) as well as phylodiversities (Chao, Chiu, et al., 2014a; Chiu et al., 2014). 
+
+Four classes of **similarity** measures derived from Hill number beta diversities have been proposed, from which dissimilarity measures can be obtained by calculating their one‐complements (1‐XqN). The Sørensen‐type classes quantify similarity from the perspective of the subsystem, while the Jaccard‐type classes quantify similarity from the perspective of the overall system (Chao et al., 2019; Chiu et al., 2014).
+
+### Sørensen‐type overlap (CqN)
+The Sørensen‐type overlap (CqN) quantifies the effective average proportion of a sub‐ system's OTUs (or lineages in the case of phylodiversities) that is shared across all subsystems. This is thus a metric that quantifies overlap from the subsystem's perspective. Its corresponding dissimilarity measure (1 − CqN) quantifies the effective average proportion of nonshared OTUs or lineages in a system.
+
+````R
+beta <- div_part(abundance.table[,c(1,2)],qvalue=0)$Beta
+CqN(beta,qvalue=0,N=2)
+# [1] 0.6666667
+
+beta <- div_part(abundance.table[,c(1,2)],qvalue=1)$Beta
+CqN(beta,qvalue=1,N=2)
+# [1] 0.7947585
+
+beta <- div_part(abundance.table[,c(1,2)],qvalue=2)$Beta
+CqN(beta,qvalue=2,N=2)
+# [1] 0.7933461
+````
+
+### Jaccard‐type overlap (CqN)
+The Jaccard‐type overlap (UqN) quantifies the effective proportion of OTUs or lineages in a system that are shared across all subsystems. Hence, this metric quantifies overlap from the perspective of the overall system. Its corresponding dissimilarity (1 − UqN) quantifies the effective proportion of nonshared OTUs or lineages in the overall system.
+
+````R
+beta <- div_part(abundance.table[,c(1,2)],qvalue=0)$Beta
+UqN(beta,qvalue=0,N=2)
+# [1] 0.5
+
+beta <- div_part(abundance.table[,c(1,2)],qvalue=1)$Beta
+UqN(beta,qvalue=1,N=2)
+# [1] 0.7947574
+
+beta <- div_part(abundance.table[,c(1,2)],qvalue=2)$Beta
+UqN(beta,qvalue=2,N=2)
+# [1] 0.8847663
+````
+
+### Sørensen‐type turnover-complement (VqN)
+The Sørensen‐type turnover‐complement (Vqn) is the complement of the Sørensen‐type turnover, which quantifies the normalized OTU turnover rate with respect to the average subsystem (i.e., alpha), thus provides the proportion of a typical subsystem that changes across subsystems (Harrison, Ross, & Lawton, 1992; Jost, 2007).
+
+````R
+beta <- div_part(abundance.table[,c(1,2)],qvalue=0)$Beta
+VqN(beta,N=2)
+# [1] 0.6666667
+
+beta <- div_part(abundance.table[,c(1,2)],qvalue=1)$Beta
+VqN(beta,N=2)
+# [1] 0.8471202
+
+beta <- div_part(abundance.table[,c(1,2)],qvalue=2)$Beta
+VqN(beta,N=2)
+# [1] 0.8847663
+````
+
+### Jaccard‐type turnover-complement (SqN)
+The Jaccard‐type turnover‐complement (SqN)is the complement of the Jaccard‐type turnover, which quantifies the normalized OTU turnover rate with respect to the whole system (i.e. gamma).
+
+````R
+beta <- div_part(abundance.table[,c(1,2)],qvalue=0)$Beta
+SqN(beta,N=2)
+# [1] 0.5
+
+beta <- div_part(abundance.table[,c(1,2)],qvalue=1)$Beta
+SqN(beta,N=2)
+# [1] 0.7347863
+
+beta <- div_part(abundance.table[,c(1,2)],qvalue=2)$Beta
+SqN(beta,N=2)
+# [1] 0.7933461
+````
+
+These (dis)similarity metrics are generalisations for multiple systems and q-values that encompass, as special cases, some of the most popular (dis)similarity measures used in ecology (Chao, Chiu, et al., 2014a; Chao et al., 2016; Jost, 2007). 
+
+For instance, C02 (the Sørensen‐type overlap between two systems [N = 2] when OTU phylogenies are not considered and q = 0) produces the Sørensen similarity index, while C22 (idem but q = 2) yields the Morisita‐Horn index. 
 
 ````R
 #Create a hierarchy table
