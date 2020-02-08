@@ -218,9 +218,36 @@ SqN(beta,N=2)
 # [1] 0.7933461
 ````
 
-These (dis)similarity metrics are generalisations for multiple systems and q-values that encompass, as special cases, some of the most popular (dis)similarity measures used in ecology (Chao, Chiu, et al., 2014a; Chao et al., 2016; Jost, 2007). 
+These (dis)similarity metrics are generalisations for multiple systems and q-values that encompass, as special cases, some of the most popular (dis)similarity measures used in ecology (Chao, Chiu, et al., 2014a; Chao et al., 2016; Jost, 2007). For instance, C02 (the Sørensen‐type overlap between two systems [N = 2] when OTU phylogenies are not considered and q = 0) produces the Sørensen similarity index. 
 
-For instance, C02 (the Sørensen‐type overlap between two systems [N = 2] when OTU phylogenies are not considered and q = 0) produces the Sørensen similarity index, while C22 (idem but q = 2) yields the Morisita‐Horn index. 
+````R
+beta <- div_part(abundance.table[,c(1,2)],qvalue=0)$Beta
+CqN(beta,qvalue=0,N=2)
+# [1] 0.6666667
+
+library(vegan)
+betadiver(x=t(abundance.table[,c(1,2)]), method = "sor")
+#           Sample1
+# Sample2 0.6666667
+````
+Another noteworthy example is that the measure 1 − U02 (the one‐complement of the Jaccard‐type overlap when OTU phylogenies are considered, q = 0 and N = 2) is identical to the unweighted UniFrac distance (Lozupone & Knight, 2005):
+
+````R
+uneventree <- read.tree(text="(((OTU1:0.5,OTU2:0.5):0.25,OTU4:0.75):0.25,OTU3:1);")
+
+unifrac <- GUniFrac(t(abundance.table[,c(1,2)]), uneventree)$unifracs
+unifrac[, , "d_UW"]
+#          Sample1   Sample2
+# Sample1 0.0000000 0.3846154
+# Sample2 0.3846154 0.0000000
+ 
+beta <- div_part(abundance.table[,c(1,2)],qvalue=0,tree=uneventree)$Beta
+1-UqN(beta,qvalue=0,N=2)
+# [1] 0.3846154
+````
+Further relations between these four (dis)similarity measures and other popular in‐ dices can be found elsewhere (e.g., Jost, 2007, Chao et al., 2012, Chiu et al., 2014). If researchers opt for basing diversity measurements on Hill numbers, it is also advisable to frame dissimilarity measurements within the same scheme. Basing dissimilarity measurements on beta diversities derived from Hill numbers enables logical consistency to be kept with the conclusions based on Hill numbers (Chao et al., 2012; Jost, 2007). Furthermore, as all measures are continuous as q ranges from zero to infinity, (dis)similarity profiles can be made for any of them (Chiu et al., 2014).
+
+## OTHERS
 
 ````R
 #Create a hierarchy table
