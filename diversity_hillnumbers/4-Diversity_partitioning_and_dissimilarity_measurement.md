@@ -124,8 +124,27 @@ sum(rowSums(pi.w)^qvalue)^(1/(1 - qvalue))
 
 ### Beta diversity
 
-## (Dis)similarity computation
+Beta diversity is often used to vaguely refer to any kind of compositional heterogeneity among systems (Barwell, Isaac, & Kunin, 2015; Chao, Chiu, et al., 2014a; Tuomisto, 2010a,2010b). However, when diversity partitioning is carried out using Hill numbers, beta diversity is an actual diversity value that measures the **effective number of equally large and completely distinct subsystems** in a system. The Hill number beta diversity can also be interpreted as a unitless scalar that quantifies the **ratio of diversities between two levels (alpha and gamma)** of observation; thus, it also quantifies how many times richer an entire system is in effective OTUs (gamma diversity) than its constituent subsystems are on average (alpha diversity).
 
+
+````R
+#Diversity partitioning between Sample2 and Sample4 (identical systems)
+div_part(abundance.table[,c(2,4)],qvalue=0)
+# $Beta
+# [1] 1
+
+#Diversity partitioning between Sample1 and Sample3 (completely different systems)
+div_part(abundance.table[,c(1,3)],qvalue=0)
+# $Beta
+# [1] 2
+
+#Diversity partitioning between Sample1 and Sample2 (¡different systems)
+div_part(abundance.table[,c(1,2)],qvalue=0)
+# $Beta
+# [1] 1.333333
+````
+
+## (Dis)similarity computation
 
 ````R
 #Create a hierarchy table
@@ -136,4 +155,9 @@ hierarchy.table
 # [2,] "Sample2" "SP1" 
 # [3,] "Sample3" "SP2" 
 # [4,] "Sample4" "SP2"
+
+#Diversity partitioning between Sample2 and Sample4
+div_part(abundance.table,hierarchy=hierarchy.tableπ[c(2,4),])
+
+
 ````
