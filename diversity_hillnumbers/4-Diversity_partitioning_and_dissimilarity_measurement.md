@@ -126,6 +126,7 @@ sum(rowSums(pi.w)^qvalue)^(1/(1 - qvalue))
 
 Beta diversity is often used to vaguely refer to any kind of compositional heterogeneity among systems (Barwell, Isaac, & Kunin, 2015; Chao, Chiu, et al., 2014a; Tuomisto, 2010a,2010b). However, when diversity partitioning is carried out using Hill numbers, beta diversity is an actual diversity value that measures the **effective number of equally large and completely distinct subsystems** in a system. The Hill number beta diversity can also be interpreted as a unitless scalar that quantifies the **ratio of diversities between two levels (alpha and gamma)** of observation; thus, it also quantifies how many times richer an entire system is in effective OTUs (gamma diversity) than its constituent subsystems are on average (alpha diversity).
 
+The Hill number beta diversity always ranges from 1 (when all subsystems are identical) to the actual number of subsystems (when all subsystems are completely different) (Chao, Chiu, et al., 2014a; Chiu et al., 2014).
 
 ````R
 #Diversity partitioning between Sample2 and Sample4 (identical systems)
