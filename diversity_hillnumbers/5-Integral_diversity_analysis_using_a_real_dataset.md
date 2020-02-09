@@ -161,6 +161,7 @@ divq1phylo <- div_test(otutable,qvalue=1,hierarchy=sampleinfo,tree=tree,posthoc=
 ````
 
 Plot posthoc information
+
 ````R
 #All p-values
 div_test_plot(divq1phylo, chart="jitter",posthoc=TRUE)
@@ -168,3 +169,21 @@ div_test_plot(divq1phylo, chart="jitter",posthoc=TRUE)
 #Significant p-values
 div_test_plot(divq1phylo, chart="jitter",posthoc=TRUE,threshold=0.05)
 ````
+
+Safe plots as PDF
+
+````R
+pdf("divq0.pdf",width=8,height=6)
+div_test_plot(divq0, chart="jitter",posthoc=TRUE,threshold=0.05)
+dev.off()
+
+pdf("divq1.pdf",width=8,height=6)
+div_test_plot(divq1, chart="jitter",posthoc=TRUE,threshold=0.05)
+dev.off()
+
+pdf("divq1phylo.pdf",width=8,height=6)
+div_test_plot(divq1phylo, chart="jitter",posthoc=TRUE,threshold=0.05)
+dev.off()
+````
+
+Ecological explanation
