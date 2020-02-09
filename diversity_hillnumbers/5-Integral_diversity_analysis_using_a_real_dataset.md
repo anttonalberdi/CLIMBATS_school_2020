@@ -97,7 +97,7 @@ tree <- match_data(otutable,tree,output="tree")
 match_data(otutable,tree)
 # OTUs in the OTU table and OTU tree match perfectly.
 ````
-## Beginning the diversity analyses
+## Beginning with the diversity analyses
 We will first compute the Hill numbers of all samples independently.
 
 ````R
@@ -120,3 +120,22 @@ hill_div(otutable,qvalue=1,tree=tree)
 hill_div(otutable,qvalue=2,tree=tree)
 ````
 Computing phylogenetic Hill numbers takes considerably longer than computing the neutral diversity metrics. This is because entropy values are calculated for every branch in the phylogenetic tree. In this example, the tree only has 244 tips and 243 internal nodes, so the computation is fast. When trees contain thousands of OTUs though, computing entropy values for all branches might take hours.
+
+## Comparing sample-level diversity means across species
+One of the basic operations when studying diversity patterns is to compare diversities across groups. In our example, we have 40 samples belonging to 4 different predator species. The relation between both is set by the so-called hierarchy table, in this example identified as "sampleinfo".
+
+````R
+#Visualise the structure
+sampleinfo
+
+#Test whether the mean diversity values differ across species when q=0
+div_test(otutable,qvalue=0,hierarchy=sampleinfo)
+
+#Test whether the mean diversity values differ across species when q=1
+div_test(otutable,qvalue=1,hierarchy=sampleinfo)
+
+#The same considering phylogenetic relations across OTUS
+div_test(otutable,qvalue=0,hierarchy=sampleinfo,tree=tree)
+div_test(otutable,qvalue=1,hierarchy=sampleinfo,tree=tree)
+
+````
