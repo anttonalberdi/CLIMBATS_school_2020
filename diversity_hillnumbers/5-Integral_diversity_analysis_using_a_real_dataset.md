@@ -137,5 +137,34 @@ div_test(otutable,qvalue=1,hierarchy=sampleinfo)
 #The same considering phylogenetic relations across OTUS
 div_test(otutable,qvalue=0,hierarchy=sampleinfo,tree=tree)
 div_test(otutable,qvalue=1,hierarchy=sampleinfo,tree=tree)
+````
+Short explanation
 
+````R
+#Create div_test objects
+divq0 <- div_test(otutable,qvalue=0,hierarchy=sampleinfo)
+divq1 <- div_test(otutable,qvalue=1,hierarchy=sampleinfo)
+divq0phylo <- div_test(otutable,qvalue=0,hierarchy=sampleinfo,tree=tree)
+divq1phylo <- div_test(otutable,qvalue=1,hierarchy=sampleinfo,tree=tree)
+
+#Plot them using div_test_plot()
+div_test_plot(divq0)
+div_test_plot(divq1phylo, chart="jitter")
+````
+Running tests with post-hoc analyses
+
+````R
+divq0 <- div_test(otutable,qvalue=0,hierarchy=sampleinfo,posthoc=TRUE)
+divq1 <- div_test(otutable,qvalue=1,hierarchy=sampleinfo,posthoc=TRUE)
+divq0phylo <- div_test(otutable,qvalue=0,hierarchy=sampleinfo,tree=tree,posthoc=TRUE)
+divq1phylo <- div_test(otutable,qvalue=1,hierarchy=sampleinfo,tree=tree,posthoc=TRUE)
+````
+
+Plot posthoc information
+````R
+#All p-values
+div_test_plot(divq1phylo, chart="jitter",posthoc=TRUE)
+
+#Significant p-values
+div_test_plot(divq1phylo, chart="jitter",posthoc=TRUE,threshold=0.05)
 ````
