@@ -121,7 +121,7 @@ hill_div(otutable,qvalue=2,tree=tree)
 ````
 Computing phylogenetic Hill numbers takes considerably longer than computing the neutral diversity metrics. This is because entropy values are calculated for every branch in the phylogenetic tree. In this example, the tree only has 439 tips and 438 internal nodes, so the computation is fast. When trees contain thousands of OTUs though, computing entropy values for all branches might take hours.
 
-## Comparing sample-level diversity means across species
+## Comparing sample-level diversity across groups (species)
 One of the basic operations when studying diversity patterns is to compare diversities across groups. In our example, we have 40 samples belonging to 4 different predator species. The relation between both is set by the so-called hierarchy table, in this example identified as "sampleinfo".
 
 ````R
@@ -188,3 +188,6 @@ dev.off()
 ![Diversity test plots](https://github.com/anttonalberdi/CLIMBATS_school_2020/blob/master/diversity_hillnumbers/images/real_example_hill_test_plots.png)
 
 Ecological explanation
+
+## Within-group (species) diversity partitioning
+One 
