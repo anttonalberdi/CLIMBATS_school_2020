@@ -52,8 +52,8 @@ colSums(otutable)
 
 # We might also want to check what is the minimum representation of an OTU in a sample
 min(otutable[otutable > 0])
-# [1] 0.0001943025
-# There is at least one OTU in a sample with a relative representation of 0.01% of the total reads.
+# [1] 0.0001916443
+# There is at least one OTU in a sample with a relative representation of 0.1% of the total reads.
 
 # An histogram will give us a better overview of the distribution of the relative abundances. Note that 0 values have been skipped.
 hist(otutable[otutable > 0])
@@ -63,10 +63,10 @@ At this point we might be interested in filtering OTUs with very low representat
 ````R
 # Check how many samples are represented in the OTU table
 nrow(otutable)
-# [1] 455
+# [1] 843
 otutable <- copy_filt(otutable,threshold=0.001)
 nrow(otutable)
-# [1] 244
+# [1] 439
 ````
 
 Now that we have removed a large quantity of OTUs, we will check whether the OTU names in the table and the tree match, as this is essential for the correct analysis of the data. This can be easily done using the function match_data().
@@ -80,12 +80,12 @@ As expected, the function warns that the OTU tree contains OTUs absent in the OT
 
 ````R
 match_data(otutable,tree,output="tree")
-# The following OTUs/ASVs were removed from the tree for being absent in the count table: OTU2706, OTU2398, OTU3827, OTU2391 (...)
+# The following OTUs/ASVs were removed from the tree for being absent in the count table: OTU1948, OTU1914, OTU615, OTU2578 (...)
 # 
-# Phylogenetic tree with 244 tips and 243 internal nodes.
+# Phylogenetic tree with 439 tips and 438 internal nodes.
 # 
 # Tip labels:
-#	OTU92, OTU2514, OTU168, OTU358, OTU269, OTU181, ...
+#	OTU168, OTU1787, OTU786, OTU1509, OTU358, OTU219, ...
 # 
 # Rooted; includes branch lengths.
 ````
@@ -119,7 +119,7 @@ hill_div(otutable,qvalue=0,tree=tree)
 hill_div(otutable,qvalue=1,tree=tree)
 hill_div(otutable,qvalue=2,tree=tree)
 ````
-Computing phylogenetic Hill numbers takes considerably longer than computing the neutral diversity metrics. This is because entropy values are calculated for every branch in the phylogenetic tree. In this example, the tree only has 244 tips and 243 internal nodes, so the computation is fast. When trees contain thousands of OTUs though, computing entropy values for all branches might take hours.
+Computing phylogenetic Hill numbers takes considerably longer than computing the neutral diversity metrics. This is because entropy values are calculated for every branch in the phylogenetic tree. In this example, the tree only has 439 tips and 438 internal nodes, so the computation is fast. When trees contain thousands of OTUs though, computing entropy values for all branches might take hours.
 
 ## Comparing sample-level diversity means across species
 One of the basic operations when studying diversity patterns is to compare diversities across groups. In our example, we have 40 samples belonging to 4 different predator species. The relation between both is set by the so-called hierarchy table, in this example identified as "sampleinfo".
