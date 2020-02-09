@@ -185,5 +185,6 @@ pdf("divq1phylo.pdf",width=8,height=6)
 div_test_plot(divq1phylo, chart="jitter",posthoc=TRUE,threshold=0.05)
 dev.off()
 ````
+![Diversity test plots](https://github.com/anttonalberdi/CLIMBATS_school_2020/blob/master/diversity_hillnumbers/images/real_example_hill_test_plots.png)
 
 Ecological explanation
