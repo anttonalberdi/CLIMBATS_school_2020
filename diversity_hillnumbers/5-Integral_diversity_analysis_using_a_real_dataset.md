@@ -37,7 +37,7 @@ sampleinfo <- read.csv("EuropeBatDiet.sampleinfo.csv",row.names=1)
 sampleinfo
 ````
 
-## Screening and editing the data files
+## Screening and pre-processing the data files
 We will first inspect the general properties of the OTU table.
 
 ````R
@@ -63,40 +63,60 @@ At this point we might be interested in filtering OTUs with very low representat
 ````R
 # Check how many samples are represented in the OTU table
 nrow(otutable)
-otutable <- copy_filt(otutable,threshold=0.02)
+# [1] 455
+otutable <- copy_filt(otutable,threshold=0.001)
+nrow(otutable)
+# [1] 244
 ````
 
-
-################# editing here #######
-
-
-
-
-
-
-Now, we will check whether the OTU names in the table and the tree match, as this is essential for the correct analysis of the data. This can be easily done using the function match_data().
+Now that we have removed a large quantity of OTUs, we will check whether the OTU names in the table and the tree match, as this is essential for the correct analysis of the data. This can be easily done using the function match_data().
 
 ````R
 match_data(otutable,tree)
 # The OTU tree contains OTUs absent in the OTU table. Filter the OTU tree.
 ````
 
-The function warns that the OTU tree contains OTUs absent in the OTU table, and tells us to filter the OTU tree. The same function can be used to perform such a filtering, by specifying the type of output we want.
+As expected, the function warns that the OTU tree contains OTUs absent in the OTU table, and tells us to filter the OTU tree. The same function can be used to perform such a filtering, by specifying the type of output we want.
+
 ````R
 match_data(otutable,tree,output="tree")
-# The following OTUs/ASVs were removed from the tree for being absent in the count table: OTU334, OTU530, OTU1948, OTU1309, # OTU1970
+# The following OTUs/ASVs were removed from the tree for being absent in the count table: OTU2706, OTU2398, OTU3827, OTU2391 (...)
 # 
-# Phylogenetic tree with 699 tips and 698 internal nodes.
+# Phylogenetic tree with 244 tips and 243 internal nodes.
 # 
 # Tip labels:
-# 	OTU944, OTU2775, OTU168, OTU450, OTU700, OTU219, ...
+#	OTU92, OTU2514, OTU168, OTU358, OTU269, OTU181, ...
 # 
 # Rooted; includes branch lengths.
 ````
 
 The function returns that a few OTUs have been removed from the tree, but the tree has not been saved. To save the tree, we need to specify a new object, which can have the same name as the original tree. We can run the match_data() function again to ensure the OTU names at the OTU table and tree are matching.
+
 ````R
 tree <- match_data(otutable,tree,output="tree")
 match_data(otutable,tree)
 # OTUs in the OTU table and OTU tree match perfectly.
 ````
+## Beginning the diversity analyses
+We will first compute the Hill numbers of all samples independently.
+
+````R
+hill_div(otutable,qvalue=0)
+hill_div(otutable,qvalue=1)
+hill_div(otutable,qvalue=2)
+````
+That was fast. Remember we can also compute traditional diversity indices:
+
+````R
+index_div(otutable,index="richness")
+index_div(otutable,index="shannon")
+index_div(otutable,index="simpson")
+````
+Now the same for the phylogenetic Hill numbers.
+
+````R
+hill_div(otutable,qvalue=0,tree=tree)
+hill_div(otutable,qvalue=1,tree=tree)
+hill_div(otutable,qvalue=2,tree=tree)
+````
+Computing phylogenetic Hill numbers takes considerably longer than computing the neutral diversity metrics. This is because entropy values are calculated for every branch in the phylogenetic tree. In this example, the tree only has 244 tips and 243 internal nodes, so the computation is fast. When trees contain thousands of OTUs though, computing entropy values for all branches might take hours.
