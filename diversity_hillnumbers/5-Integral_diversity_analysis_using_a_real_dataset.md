@@ -189,5 +189,16 @@ dev.off()
 
 Ecological explanation
 
-## Within-group (species) diversity partitioning
-One 
+## 2-level diversity partitioning
+
+````R
+div_part(otutable,qvalue=1)
+div_part(otutable,qvalue=1, tree=tree)
+````
+
+## 3-level diversity partitioning
+
+````R
+div_part(otutable,qvalue=1,hierarchy=sampleinfo)
+div_part(otutable,qvalue=1,tree=tree, hierarchy=sampleinfo)
+````
