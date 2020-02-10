@@ -31,6 +31,7 @@ If you want to use the latest development version available at Github, you need 
 ````R
 install.packages("devtools")
 library(devtools)
+detach("package:hilldiv", unload=TRUE)
 remove.packages("hilldiv") #if already an older version installed
 install_github("anttonalberdi/hilldiv")
 library(hilldiv,quietly=TRUE)
