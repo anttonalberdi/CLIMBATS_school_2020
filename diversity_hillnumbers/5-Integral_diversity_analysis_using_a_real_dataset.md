@@ -202,3 +202,28 @@ div_part(otutable,qvalue=1, tree=tree)
 div_part(otutable,qvalue=1,hierarchy=sampleinfo)
 div_part(otutable,qvalue=1,tree=tree, hierarchy=sampleinfo)
 ````
+
+## Dissimilarity
+
+````R
+# Across samples
+pair_dis(otutable,qvalue=1)
+
+# Across samples and species
+pair_dis(otutable,qvalue=1,hierarchy=sampleinfo)
+# Save to an object
+pairdis.q1 <- pair_dis(otutable,qvalue=1,hierarchy=sampleinfo)
+pairdis.q0 <- pair_dis(otutable,qvalue=0,hierarchy=sampleinfo)
+
+# Across species
+pair_dis(otutable,qvalue=1,hierarchy=sampleinfo,level=2)
+
+pairdis.q1 <- pair_dis(otutable,qvalue=1,hierarchy=sampleinfo,tree=tree)
+
+````
+
+````R
+pair_dis_plot(pairdis.q0$L1_UqN,hierarchy=sampleinfo)
+
+
+````
