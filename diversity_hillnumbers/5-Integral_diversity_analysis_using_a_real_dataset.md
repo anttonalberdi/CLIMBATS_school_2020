@@ -218,12 +218,18 @@ pairdis.q0 <- pair_dis(otutable,qvalue=0,hierarchy=sampleinfo)
 # Across species
 pair_dis(otutable,qvalue=1,hierarchy=sampleinfo,level=2)
 
-pairdis.q1 <- pair_dis(otutable,qvalue=1,hierarchy=sampleinfo,tree=tree)
+pair_dis(otutable,qvalue=1,hierarchy=sampleinfo,tree=tree)
 
 ````
 
 ````R
-pair_dis_plot(pairdis.q0$L1_UqN,hierarchy=sampleinfo)
+pairdis.q1 <- pair_dis_plot(pairdis.q1$L1_UqN,hierarchy=sampleinfo)
 
+pdf("nmds.pdf",width=8,height=6)
+pair_dis_plot(pairdis.q1$L1_UqN,hierarchy=sampleinfo)
+dev.off()
 
+pdf("shepard.pdf",width=8,height=6)
+pair_dis_plot(pairdis.q1$L1_UqN,hierarchy=sampleinfo,type="Shepard")
+dev.off()
 ````
