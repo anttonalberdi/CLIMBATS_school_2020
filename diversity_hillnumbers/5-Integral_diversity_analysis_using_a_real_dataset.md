@@ -189,6 +189,28 @@ dev.off()
 
 Ecological explanation
 
+## Plotting diversity profiles
+
+````R
+# One profile per sample
+div_profile(otutable)
+div_profile(otutable, qvalues=seq(from = 0, to = 3, by = (0.2)))
+div_profile(otutable, qvalues=seq(from = 0, to = 3, by = (0.2)),hierarchy=sampleinfo)
+````
+
+````R
+species_profile <- div_profile(otutable, qvalues=seq(from = 0, to = 3, by = (0.2)),hierarchy=sampleinfo)
+pdf("div_profile.pdf",width=8,height=6)
+div_profile_plot(species_profile)
+dev.off()
+
+species_profile2 <- div_profile(otutable, qvalues=seq(from = 0, to = 3, by = (0.2)),hierarchy=sampleinfo,tree=tree)
+pdf("phylodiv_profile.pdf",width=8,height=6)
+div_profile_plot(species_profile2)
+dev.off()
+
+````
+
 ## 2-level diversity partitioning
 
 ````R
