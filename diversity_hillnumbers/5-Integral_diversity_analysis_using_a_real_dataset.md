@@ -210,6 +210,8 @@ div_profile_plot(species_profile2)
 dev.off()
 
 ````
+![Diversity profiles](https://github.com/anttonalberdi/CLIMBATS_school_2020/blob/master/diversity_hillnumbers/images/div_profiles.png)
+
 
 ## 2-level diversity partitioning
 
@@ -255,3 +257,5 @@ pdf("shepard.pdf",width=8,height=6)
 pair_dis_plot(pairdis.q1$L1_UqN,hierarchy=sampleinfo,type="Shepard")
 dev.off()
 ````
+![Pairwise diversity visualisation](https://github.com/anttonalberdi/CLIMBATS_school_2020/blob/master/diversity_hillnumbers/images/nmds.png)
+
