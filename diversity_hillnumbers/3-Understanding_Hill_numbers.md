@@ -177,6 +177,7 @@ hill_div(evensystem,qvalue=0,tree=eventree)
 hill_div(evensystem,qvalue=0,tree=uneventree)
 [1] 2.5
 ````
+![Example trees](https://github.com/anttonalberdi/CLIMBATS_school_2020/blob/master/diversity_hillnumbers/images/example_trees.png)
 
 The even tree yields exactly the same diversity value as the neutral Hill number, while the hierarchical tree yields a lower diversity value. Remember that while the neutral Hill number yields a diversity value in "effective number of OTUs", the phylogenetic Hill number yields a diversity value in "effective number of lineages".
 
