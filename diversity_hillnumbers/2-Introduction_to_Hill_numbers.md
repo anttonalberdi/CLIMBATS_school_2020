@@ -5,7 +5,7 @@ Richness, Shannon index and Simpson index belong to a single statistical framewo
 
 This expression was first discovered by Hill (1973), hence the use of the name “Hill numbers” to refer to the output of this formula. Hill numbers have two major advantages over diversity indi‐ ces: (a) the interpretation of the measure and its measurement unit is always the same (Chao, Chiu, et al., 2014a; Tuomisto, 2010a), and ii) the sensitivity towards abundant and rare OTUs can be modulated with the parameter q. 
 
-#### Effective number of OTUs
+### Effective number of OTUs
 The expression yields a diver‐ sity measure in “effective number of OTUs”, that is, the number of equally abundant OTUs that would be needed to give the same value of diversity (Hill, 1973; Jost, 2006). When all OTUs in a system have the same relative abundances, as in the moth example given above, the effective number of OTUs for all q values equals the actual number of OTUs, namely richness.
 
 ````R
@@ -81,7 +81,7 @@ hill_div(superunevensystem,qvalue=2)
 hill_div(superunevensystem,qvalue=5)
 # [1] 1.037471
 ````
-#### Plotting diversity profiles
+### Plotting diversity profiles
 Hill numbers also enable diversity profiles of systems and subsystems to be plotted as continuous functions of the parameter q. This is useful to characterize the OTU abundance distri‐ bution of a system, as different compositions and abundance distributions can yield the same value for a particular order of diversity (e.g., q=1),but not for many of them(e.g. q=0, q=0.5 and q=1). Hill numbers convey all information contained in a species abundance distribution at a glance (Chao, Chiu, et al., 2014a; Leinster & Cobbold, 2012).
 
 ````R
@@ -99,10 +99,10 @@ mergedsystem_profile <- div_profile(mergedsystem)
 div_profile_plot(mergedsystem_profile)
 ````
 
-#### Modulating the q value to adjust to study systems' properties
+### Modulating the q value to adjust to study systems' properties
 As shown above, the sensitivity towards abundant and rare OTUs can be modulated using the scaling parameter q, known as the “order” of diversity (Jost, 2006). **The larger the q value, the higher the importance attributed to abundant OTUs.** The ability to modulate the sensitivity towards abundant and rare OTUs by modifying a single parameter (q) is a useful means with which to adjust diversity measurements to the type of data and re‐ search question. For example, when rare types are considered to be of low importance (e.g., when attempting to define a core diet or mi‐ crobiome), or when rare types are considered untrustworthy due to technical issues (e.g., PCR or sequencing errors), researchers might opt for using a high q value, for example, q = 2, which overweighs abundant OTUs. The result can be interpreted as the effective num‐ ber of dominant OTUs in the system (Chao, Chiu, et al., 2014a). In contrast, if rare types are considered essential for the system, or re‐ searchers do not trust the relative abundance data due to potential technical biases, researchers might opt for using a q value of 0 that simply counts the number of types.
 
-#### Relationship between Hill numbers and traditional popular indices
+### Relationship between Hill numbers and traditional popular indices
 Three q values are particularly relevant, both for their significance, and their close relationship to popular diversity indices: q = 0, q = 1 and q = 2. Indeed, common diversity indices can be transformed to Hill numbers by applying simple mathematical transformations, as shown below.
 
 As we have observed in the previous example, when a diversity of order zero (q = 0) is applied to the Hill numbers expression, it becomes insensitive to OTU frequencies, thus yielding a richness value. As the relative abundances of OTUs are overlooked, rare OTUs are overweighed.
