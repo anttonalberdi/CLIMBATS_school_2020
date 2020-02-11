@@ -1,7 +1,7 @@
 # 3 - Understanding Hill numbers 
 The aim of this lesson is to get familiar with the Hill numbers expression and understand how and why the diversity values vary when using systems with different relative representation of OTUs, different q-values and differently-shaped trees. 
 
-**Hill numbers expression**
+![Hill numbers expression](https://github.com/anttonalberdi/CLIMBATS_school_2020/blob/master/diversity_hillnumbers/images/hill-basic_sum.png)
 
 For doing so, and for the sake of simplicity, we will work with mock systems rather than OTU tables. The systems we will create will be comprised of 30 OTUs.
 
