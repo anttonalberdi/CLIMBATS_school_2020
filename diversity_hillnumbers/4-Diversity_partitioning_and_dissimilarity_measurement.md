@@ -246,21 +246,3 @@ beta <- div_part(abundance.table[,c(1,2)],qvalue=0,tree=uneventree)$Beta
 # [1] 0.3846154
 ````
 Further relations between these four (dis)similarity measures and other popular in‐ dices can be found elsewhere (e.g., Jost, 2007, Chao et al., 2012, Chiu et al., 2014). If researchers opt for basing diversity measurements on Hill numbers, it is also advisable to frame dissimilarity measurements within the same scheme. Basing dissimilarity measurements on beta diversities derived from Hill numbers enables logical consistency to be kept with the conclusions based on Hill numbers (Chao et al., 2012; Jost, 2007). Furthermore, as all measures are continuous as q ranges from zero to infinity, (dis)similarity profiles can be made for any of them (Chiu et al., 2014).
-
-## OTHERS
-
-````R
-#Create a hierarchy table
-hierarchy.table <- cbind(Samples=c("Sample1","Sample2","Sample3","Sample4"),Groups=c("SP1","SP1","SP2","SP2"))
-hierarchy.table
-#      Samples   Groups
-# [1,] "Sample1" "SP1" 
-# [2,] "Sample2" "SP1" 
-# [3,] "Sample3" "SP2" 
-# [4,] "Sample4" "SP2"
-
-#Diversity partitioning between Sample2 and Sample4
-div_part(abundance.table,hierarchy=hierarchy.tableπ[c(2,4),])
-
-
-````
