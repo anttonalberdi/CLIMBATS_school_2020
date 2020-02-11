@@ -84,7 +84,7 @@ hill_div(superunevensystem,qvalue=5)
 ![Hill numbers properties and their relation with traditional indices](https://github.com/anttonalberdi/CLIMBATS_school_2020/blob/master/diversity_hillnumbers/images/hill-index-profile.png)
 
 ### Plotting diversity profiles
-Hill numbers also enable diversity profiles of systems and subsystems to be plotted as continuous functions of the parameter q. This is useful to characterize the OTU abundance distri‐ bution of a system, as different compositions and abundance distributions can yield the same value for a particular order of diversity (e.g., q=1),but not for many of them(e.g. q=0, q=0.5 and q=1). Hill numbers convey all information contained in a species abundance distribution at a glance (Chao, Chiu, et al., 2014a; Leinster & Cobbold, 2012).
+Hill numbers also enable diversity profiles of systems and subsystems to be plotted as continuous functions of the parameter q. This is useful to characterize the OTU abundance distribution of a system, as different compositions and abundance distributions can yield the same value for a particular order of diversity (e.g., q=1), but not for many of them (e.g. q=0, q=0.5 and q=1). Hill numbers convey all information contained in a species abundance distribution at a glance (Chao, Chiu, et al., 2014a; Leinster & Cobbold, 2012).
 
 ````R
 library(hilldiv)
