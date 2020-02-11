@@ -1,9 +1,7 @@
 # Introduction to Hill numbers
-Richness, Shannon index and Simpson index belong to a single statistical framework, as they all are monotonic functions of the basic sum q𝜆=ΣSi=1pqi, that is, the sum of the relative abundances of the types (pi) elevated to the q value (Jost, 2006; Keylock, 2005). 
+Richness, Shannon index and Simpson index belong to a single statistical framework, as they all are monotonic functions of the basic sum, that is, the sum of the relative abundances of the types (pi) elevated to the q value (Jost, 2006; Keylock, 2005). This implies that Hill numbers (qD), or actual diversities, rather than entropies (e.g. Shannon index) or probabilities (e.g. Simpson index), can be formulated in terms of the basic sum (qλ) and the parameter q.
 
-This implies that Hill numbers (qD), or actual diversities, rather than entropies (e.g. Shannon index) or probabilities (e.g. Simpson index), can be formulated in terms of the basic sum (qλ) and the parameter q.
-
-**Hill number expression**
+![Hill numbers expression](https://github.com/anttonalberdi/CLIMBATS_school_2020/blob/master/diversity_hillnumbers/images/hill-basic_sum.png)
 
 This expression was first discovered by Hill (1973), hence the use of the name “Hill numbers” to refer to the output of this formula. Hill numbers have two major advantages over diversity indi‐ ces: (a) the interpretation of the measure and its measurement unit is always the same (Chao, Chiu, et al., 2014a; Tuomisto, 2010a), and ii) the sensitivity towards abundant and rare OTUs can be modulated with the parameter q. 
 
