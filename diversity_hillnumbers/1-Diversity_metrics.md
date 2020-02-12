@@ -94,7 +94,7 @@ unevensystem
 #  999    1 
 
 #Compute richness
-index_div(example1,index="richness")
+index_div(unevensystem,index="richness")
 # 2
 ````
 However, the multiple OTUs present in a system are seldom distributed evenly; thus, richness is rarely the best approach with which to reflect the diversity of a system. Consider for instance, a simple system characterized with 1,000 sequence reads, in which 990 belong to OTU1 and 10 to OTU2. This would yield a richness value of 2, even though the system is overwhelmingly dominated by OTU1. 
